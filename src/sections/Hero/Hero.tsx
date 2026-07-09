@@ -55,6 +55,21 @@ export const Hero = () => {
     mouseY.set(0);
   };
 
+  const handleScrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 80;
+      const elementPosition = projectsSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerHeight;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
     <PageTransition>
       <Section className="relative min-h-[70vh] lg:min-h-[75vh] flex flex-col justify-center pt-12 pb-0 md:pt-16 lg:pt-12 lg:pb-0" background="transparent">
@@ -94,7 +109,11 @@ export const Hero = () => {
 
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
                 {/* Primary CTA */}
-                <Button size="lg" className="w-full sm:w-auto group relative overflow-hidden shadow-[0_8px_40px_-12px_rgba(var(--color-primary),0.4)] hover:shadow-[0_12px_50px_-12px_rgba(var(--color-primary),0.6)] transition-all duration-500 px-8">
+                <Button 
+                  size="lg" 
+                  onClick={handleScrollToProjects}
+                  className="w-full sm:w-auto group relative overflow-hidden shadow-[0_8px_40px_-12px_rgba(var(--color-primary),0.4)] hover:shadow-[0_12px_50px_-12px_rgba(var(--color-primary),0.6)] transition-all duration-500 px-8"
+                >
                   <span className="relative z-10 flex items-center font-semibold tracking-wide">
                     View Projects
                     <ArrowRight className="ml-3 h-4 w-4 transition-transform duration-500 group-hover:translate-x-2" />
