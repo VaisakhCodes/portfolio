@@ -11,10 +11,11 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-text-primary font-sans antialiased relative overflow-hidden">
       {/* Premium Background Atmosphere */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none bg-background">
-        <div className="absolute top-0 left-0 right-0 h-[600px] bg-gradient-to-b from-surface/80 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/[0.02] via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-[600px] bg-gradient-to-t from-surface/50 to-transparent" />
+      <div className="fixed inset-0 z-[-1] pointer-events-none" style={{ background: 'radial-gradient(circle at top center, #0B1120 0%, #09101D 35%, #070B17 100%)' }}>
+        {/* Subtle indigo ambient glow behind Hero (top right) */}
+        <div className="absolute top-[10%] right-[10%] w-[800px] h-[800px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'rgba(99,102,241,0.10)' }} />
+        {/* Faint glow near lower-left */}
+        <div className="absolute bottom-[10%] left-[5%] w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'rgba(124,58,237,0.06)' }} />
       </div>
 
       <a 

@@ -26,7 +26,7 @@ const staggerContainer = {
 export const About = () => {
   return (
     <PageTransition>
-      <Section id="about" className="py-24" background="transparent">
+      <Section id="about" className="pt-6 pb-24 md:pt-8 md:pb-24" background="transparent">
         <Container>
           <motion.div
             initial="hidden"

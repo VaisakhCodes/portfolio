@@ -4,6 +4,7 @@ import { Container } from '@/components/layout/Container';
 import { PageTransition } from '@/components/layout/PageTransition';
 import { SocialLinks } from '@/components/portfolio/SocialLinks';
 import { Button } from '@/components/ui/Button/Button';
+import { TypewriterEffect } from '@/components/ui/TypewriterEffect';
 import { ArrowRight, Download, TerminalSquare, Layers, CheckCircle2 } from 'lucide-react';
 
 const containerVariants: any = {
@@ -56,20 +57,9 @@ export const Hero = () => {
 
   return (
     <PageTransition>
-      <Section className="relative min-h-screen flex flex-col justify-center pt-12 pb-10 md:pt-16 md:pb-12 lg:pt-12 lg:pb-12" background="transparent">
+      <Section className="relative min-h-[70vh] lg:min-h-[75vh] flex flex-col justify-center pt-12 pb-0 md:pt-16 lg:pt-12 lg:pb-0" background="transparent">
         
-        {/* Background Environment - Extended to overlap seamlessly */}
-        <div className="absolute inset-x-0 top-0 bottom-[-800px] z-0 pointer-events-none">
-          {/* Subtle Grain Texture */}
-          <div className="absolute inset-0 opacity-[0.025] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)" }} />
-          
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute -top-[20%] -left-[10%] w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen opacity-60" />
-          <div className="absolute top-[40%] -right-[10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-primary/10 blur-[150px] rounded-full mix-blend-screen opacity-40" />
-          
-          {/* Soft Vignette with vertical fade out */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-background)_120%)] opacity-80" style={{ maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 100%)" }} />
-        </div>
+
         
         <Container className="relative z-10">
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-8 items-center">
@@ -82,20 +72,22 @@ export const Hero = () => {
               animate="visible"
             >
               
-              <motion.h1 variants={itemVariants} className="text-[3rem] leading-[0.9] md:text-[4.5rem] lg:text-[5.125rem] font-extrabold tracking-tight text-text-primary mb-6 md:mb-7">
+              <motion.span 
+                variants={itemVariants}
+                className="block text-xl md:text-2xl lg:text-[28px] font-medium text-text-secondary opacity-80 mb-3 lg:mb-4 tracking-wide"
+              >
+                Hi, I am
+              </motion.span>
+              <motion.h1 variants={itemVariants} className="text-[3rem] leading-[0.9] md:text-[4.5rem] lg:text-[5.125rem] font-extrabold tracking-tight text-text-primary mb-5 md:mb-7">
                 Vaisakh Mohan <br className="hidden lg:block" />
-                <span className="font-light text-text-secondary tracking-normal text-[1.5rem] md:text-[2.5rem] lg:text-[3rem] block mt-7 md:mt-8 opacity-90">
-                  Software Developer
+                <span className="font-light tracking-normal text-[1.5rem] md:text-[2.5rem] lg:text-[3rem] block mt-4 md:mt-5">
+                  <TypewriterEffect />
                 </span>
               </motion.h1>
               
-              <motion.p variants={itemVariants} className="text-body-l md:text-[1.1875rem] text-text-secondary mb-7 md:mb-8 max-w-2xl leading-relaxed font-light opacity-90">
-                Delivering clean, maintainable, and user-centric software solutions. Specialized in building responsive applications with modern frontend architectures and robust backend systems.
-              </motion.p>
-              
               {/* Premium Inline Tags */}
-              <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 mb-7 md:mb-8 text-body-s font-medium text-text-secondary">
-                <span className="flex items-center gap-2.5"><TerminalSquare className="w-4 h-4 text-primary/80"/> Python & Django</span>
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 mb-5 md:mb-7 text-body-s font-medium text-text-secondary">
+                <span className="flex items-center gap-2.5"><TerminalSquare className="w-4 h-4 text-primary/80"/> Python & React</span>
                 <span className="flex items-center gap-2.5"><Layers className="w-4 h-4 text-primary/80"/> Modern Frontend</span>
                 <span className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-primary/80"/> Production-Ready</span>
               </motion.div>
@@ -116,7 +108,7 @@ export const Hero = () => {
                 </Button>
               </motion.div>
               
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 mt-6 lg:mt-7">
+              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 mt-5 lg:mt-7">
                 <span className="text-caption font-semibold text-text-muted uppercase tracking-[0.2em]">
                   Connect
                 </span>
