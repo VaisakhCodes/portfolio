@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: Add Sitemap URL once canonical URL is known
+# Sitemap: TODO: Add Sitemap URL

@@ -1,0 +1,55 @@
+:root {
+  /* Primitive Colors */
+  --primitive-primary-default: #7C3AED;
+  --primitive-primary-hover: #6D28D9;
+  --primitive-primary-active: #5B21B6;
+  --primitive-primary-soft: #A78BFA;
+
+  --primitive-secondary-cyan: #06B6D4;
+
+  --primitive-neutral-background: #0B1120;
+  --primitive-neutral-surface1: #111827;
+  --primitive-neutral-surface2: #1F2937;
+  --primitive-neutral-surface3: #374151;
+  --primitive-neutral-border: #334155;
+  --primitive-neutral-divider: #475569;
+
+  --primitive-typography-primary: #F8FAFC;
+  --primitive-typography-secondary: #CBD5E1;
+  --primitive-typography-muted: #94A3B8;
+  --primitive-typography-disabled: #64748B;
+  --primitive-typography-inverse: #0F172A;
+
+  --primitive-semantic-success: #10B981;
+  --primitive-semantic-warning: #F59E0B;
+  --primitive-semantic-error: #F43F5E;
+  --primitive-semantic-info: #3B82F6;
+
+  /* Semantic Colors */
+  --color-primary: var(--primitive-primary-default);
+  --color-primary-hover: var(--primitive-primary-hover);
+  --color-background: var(--primitive-neutral-background);
+  --color-surface: var(--primitive-neutral-surface1);
+  --color-surface-elevated: var(--primitive-neutral-surface2);
+  --color-border: var(--primitive-neutral-border);
+  --color-text-primary: var(--primitive-typography-primary);
+  --color-text-secondary: var(--primitive-typography-secondary);
+  --color-text-muted: var(--primitive-typography-muted);
+  --color-success: var(--primitive-semantic-success);
+  --color-warning: var(--primitive-semantic-warning);
+  --color-error: var(--primitive-semantic-error);
+  --color-info: var(--primitive-semantic-info);
+  
+  /* Overlays */
+  --color-overlay-modal: rgba(0,0,0,0.60);
+  --color-overlay-drawer: rgba(0,0,0,0.50);
+  --color-overlay-tooltip: rgba(0,0,0,0.30);
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

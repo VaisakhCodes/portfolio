@@ -1,0 +1,30 @@
+:root {
+  /* Primitive Borders */
+  --primitive-border-width-thin: 1px;
+  --primitive-border-width-default: 2px;
+  
+  /* Inherits primitive colors */
+  --primitive-border-color-default: var(--primitive-neutral-border);
+  --primitive-border-color-hover: var(--primitive-neutral-surface3);
+  --primitive-border-color-focus: var(--primitive-primary-default);
+
+  /* Border Scale exposed as variables */
+  --border-width-thin: var(--primitive-border-width-thin);
+  --border-width-default: var(--primitive-border-width-default);
+  --border-color-default: var(--primitive-border-color-default);
+  --border-color-hover: var(--primitive-border-color-hover);
+  --border-color-focus: var(--primitive-border-color-focus);
+
+  /* Semantic Border Examples */
+  --input-border: var(--primitive-border-width-thin) solid var(--primitive-border-color-default);
+  --card-border: var(--primitive-border-width-thin) solid var(--primitive-border-color-default);
+  --button-border: var(--primitive-border-width-thin) solid transparent;
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

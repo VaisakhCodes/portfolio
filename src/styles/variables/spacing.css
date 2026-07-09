@@ -1,0 +1,48 @@
+:root {
+  /* Primitive Spacing */
+  --primitive-spacing-0: 0px;
+  --primitive-spacing-1: 4px;
+  --primitive-spacing-2: 8px;
+  --primitive-spacing-3: 12px;
+  --primitive-spacing-4: 16px;
+  --primitive-spacing-5: 20px;
+  --primitive-spacing-6: 24px;
+  --primitive-spacing-8: 32px;
+  --primitive-spacing-10: 40px;
+  --primitive-spacing-12: 48px;
+  --primitive-spacing-16: 64px;
+  --primitive-spacing-20: 80px;
+  --primitive-spacing-24: 96px;
+  --primitive-spacing-32: 128px;
+
+  /* Spacing Scale exposed as variables */
+  --spacing-0: var(--primitive-spacing-0);
+  --spacing-1: var(--primitive-spacing-1);
+  --spacing-2: var(--primitive-spacing-2);
+  --spacing-3: var(--primitive-spacing-3);
+  --spacing-4: var(--primitive-spacing-4);
+  --spacing-5: var(--primitive-spacing-5);
+  --spacing-6: var(--primitive-spacing-6);
+  --spacing-8: var(--primitive-spacing-8);
+  --spacing-10: var(--primitive-spacing-10);
+  --spacing-12: var(--primitive-spacing-12);
+  --spacing-16: var(--primitive-spacing-16);
+  --spacing-20: var(--primitive-spacing-20);
+  --spacing-24: var(--primitive-spacing-24);
+  --spacing-32: var(--primitive-spacing-32);
+
+  /* Semantic Spacing Examples */
+  --spacing-section: var(--primitive-spacing-24);
+  --spacing-card: var(--primitive-spacing-6);
+  --spacing-button: var(--primitive-spacing-3);
+  --spacing-navbar: var(--primitive-spacing-4);
+  --spacing-dialog: var(--primitive-spacing-8);
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

@@ -1,0 +1,21 @@
+:root {
+  /* Layout Variables */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-content: 1440px;
+
+  --navbar-height: 64px;
+  --sidebar-width: 256px;
+  --section-padding: var(--spacing-24);
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

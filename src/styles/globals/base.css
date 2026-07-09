@@ -1,0 +1,72 @@
+/* Global Foundation Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary); /* Text secondary is usually for standard body text */
+  background-color: var(--color-background);
+  
+  /* Inherits smooth scroll but applies standard layout resets */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings inherit primary typography variables */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  letter-spacing: var(--letter-spacing-heading-large);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  letter-spacing: var(--letter-spacing-heading-large);
+  font-weight: var(--font-weight-bold);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  letter-spacing: var(--letter-spacing-heading-large);
+  font-weight: var(--font-weight-semibold);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  letter-spacing: var(--letter-spacing-heading-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  letter-spacing: var(--letter-spacing-heading-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  letter-spacing: var(--letter-spacing-heading-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+::selection {
+  background-color: var(--color-primary-soft);
+  color: var(--color-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

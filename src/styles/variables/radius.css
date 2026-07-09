@@ -1,0 +1,33 @@
+:root {
+  /* Primitive Radius */
+  --primitive-radius-none: 0px;
+  --primitive-radius-xs: 4px;
+  --primitive-radius-sm: 8px;
+  --primitive-radius-md: 12px;
+  --primitive-radius-lg: 16px;
+  --primitive-radius-xl: 24px;
+  --primitive-radius-full: 9999px;
+
+  /* Radius Scale exposed as variables */
+  --radius-none: var(--primitive-radius-none);
+  --radius-xs: var(--primitive-radius-xs);
+  --radius-sm: var(--primitive-radius-sm);
+  --radius-md: var(--primitive-radius-md);
+  --radius-lg: var(--primitive-radius-lg);
+  --radius-xl: var(--primitive-radius-xl);
+  --radius-full: var(--primitive-radius-full);
+
+  /* Component Semantic Radius */
+  --button-radius: var(--primitive-radius-md);
+  --card-radius: var(--primitive-radius-lg);
+  --input-radius: var(--primitive-radius-sm);
+  --dialog-radius: var(--primitive-radius-xl);
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

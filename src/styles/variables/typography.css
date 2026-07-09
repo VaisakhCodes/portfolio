@@ -1,0 +1,49 @@
+:root {
+  /* Font Families */
+  --font-family-primary: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  /* Font Sizes */
+  --font-size-caption: 12px;
+  --font-size-body-s: 14px;
+  --font-size-body: 16px;
+  --font-size-body-l: 18px;
+  --font-size-h6: 18px;
+  --font-size-h5: 20px;
+  --font-size-h4: 24px;
+  --font-size-h3: 30px;
+  --font-size-h2: 36px;
+  --font-size-h1: 48px;
+  --font-size-display-l: 60px;
+  --font-size-display-xl: 72px;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+
+  /* Line Heights */
+  --line-height-display: 1.1;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.7;
+  --line-height-small: 1.5;
+  --line-height-code: 1.6;
+
+  /* Letter Spacing */
+  --letter-spacing-display: -0.03em;
+  --letter-spacing-heading-large: -0.02em;
+  --letter-spacing-heading-small: -0.01em;
+  --letter-spacing-body: 0;
+  --letter-spacing-caption: 0.02em;
+  --letter-spacing-overline: 0.08em;
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}

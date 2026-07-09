@@ -1,0 +1,95 @@
+@import "@fontsource-variable/geist";
+
+/* Import Custom CSS Architecture */
+@import "./styles/variables/index.css";
+/* Import Custom Global Styles */
+@import "./styles/globals/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+  }
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-text-primary);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-text-primary);
+    --popover: var(--color-surface-elevated);
+    --popover-foreground: var(--color-text-primary);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--primitive-typography-inverse);
+    --secondary: var(--color-surface-elevated);
+    --secondary-foreground: var(--color-text-primary);
+    --muted: var(--color-surface);
+    --muted-foreground: var(--color-text-muted);
+    --accent: var(--primitive-primary-soft);
+    --accent-foreground: var(--primitive-typography-inverse);
+    --destructive: var(--color-error);
+    --destructive-foreground: var(--color-text-primary);
+    --border: var(--color-border);
+    --input: var(--color-border);
+    --ring: var(--color-primary);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: var(--color-surface);
+    --sidebar-foreground: var(--color-text-primary);
+    --sidebar-primary: var(--color-primary);
+    --sidebar-primary-foreground: var(--primitive-typography-inverse);
+    --sidebar-accent: var(--color-surface-elevated);
+    --sidebar-accent-foreground: var(--color-text-primary);
+    --sidebar-border: var(--color-border);
+    --sidebar-ring: var(--color-primary);
+  }
+  .dark {
+    --background: var(--color-background);
+    --foreground: var(--color-text-primary);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-text-primary);
+    --popover: var(--color-surface-elevated);
+    --popover-foreground: var(--color-text-primary);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--primitive-typography-inverse);
+    --secondary: var(--color-surface-elevated);
+    --secondary-foreground: var(--color-text-primary);
+    --muted: var(--color-surface);
+    --muted-foreground: var(--color-text-muted);
+    --accent: var(--primitive-primary-soft);
+    --accent-foreground: var(--primitive-typography-inverse);
+    --destructive: var(--color-error);
+    --destructive-foreground: var(--color-text-primary);
+    --border: var(--color-border);
+    --input: var(--color-border);
+    --ring: var(--color-primary);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: var(--color-surface);
+    --sidebar-foreground: var(--color-text-primary);
+    --sidebar-primary: var(--color-primary);
+    --sidebar-primary-foreground: var(--primitive-typography-inverse);
+    --sidebar-accent: var(--color-surface-elevated);
+    --sidebar-accent-foreground: var(--color-text-primary);
+    --sidebar-border: var(--color-border);
+    --sidebar-ring: var(--color-primary);
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

@@ -1,0 +1,33 @@
+:root {
+  /* Primitive Motion */
+  --primitive-duration-instant: 0ms;
+  --primitive-duration-fast: 150ms;
+  --primitive-duration-normal: 250ms;
+  --primitive-duration-medium: 350ms;
+  --primitive-duration-slow: 500ms;
+  --primitive-duration-extra-slow: 700ms;
+
+  --primitive-ease-linear: linear;
+  --primitive-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --primitive-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --primitive-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Duration Scale exposed as variables */
+  --duration-fast: var(--primitive-duration-fast);
+  --duration-normal: var(--primitive-duration-normal);
+  --duration-medium: var(--primitive-duration-medium);
+  --duration-slow: var(--primitive-duration-slow);
+
+  /* Easing Scale exposed as variables */
+  --ease-standard: var(--primitive-ease-in-out);
+  --ease-enter: var(--primitive-ease-out);
+  --ease-exit: var(--primitive-ease-in);
+}
+
+[data-theme="light"] {
+  /* Light theme overrides would go here */
+}
+
+[data-theme="dark"] {
+  /* Optional explicit dark overrides */
+}
