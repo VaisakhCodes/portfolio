@@ -162,13 +162,14 @@ export const Hero = () => {
               onMouseLeave={handleMouseLeave}
               whileHover={{ scale: 1.02 }}
             >
-              {/* Premium Ambient Glow - Using radial gradient instead of blur to prevent bounding box clipping/card appearance */}
-              <div className="absolute inset-0 -translate-y-12 -translate-x-12 md:-translate-y-20 md:-translate-x-16 lg:-translate-y-14 lg:-translate-x-4 bg-[radial-gradient(circle_at_center,rgba(var(--color-primary-rgb,100,100,250),0.15)_0%,transparent_60%)] mix-blend-screen pointer-events-none scale-[1.3]" />
-              
               <img 
                 src="/iso-tech-sculpture.png" 
                 alt="Vaisakh Mohan - Software Developer" 
-                className="relative w-full h-auto drop-shadow-[0_20px_45px_rgba(0,0,0,0.3)] -translate-y-12 -translate-x-12 md:-translate-y-20 md:-translate-x-16 lg:-translate-y-14 lg:-translate-x-4 scale-[1.4] sm:scale-[1.55] lg:scale-[1.75] origin-center pointer-events-none"
+                className="relative w-full h-auto -translate-y-12 -translate-x-12 md:-translate-y-20 md:-translate-x-16 lg:-translate-y-14 lg:-translate-x-4 scale-[1.4] sm:scale-[1.55] lg:scale-[1.75] origin-center pointer-events-none"
+                style={{
+                  maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)'
+                }}
                 loading="eager"
               />
             </motion.div>
