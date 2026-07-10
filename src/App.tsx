@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-text-primary font-sans antialiased relative overflow-hidden">
       {/* Premium Background Atmosphere */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none" style={{ background: 'radial-gradient(circle at top center, #0B1120 0%, #09101D 35%, #070B17 100%)' }}>
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
         {/* Subtle indigo ambient glow behind Hero (top right) */}
         <div className="absolute top-[10%] right-[10%] w-[800px] h-[800px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'rgba(99,102,241,0.10)' }} />
         {/* Faint glow near lower-left */}

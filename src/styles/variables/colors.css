@@ -7,12 +7,12 @@
 
   --primitive-secondary-cyan: #06B6D4;
 
-  --primitive-neutral-background: #070B17;
-  --primitive-neutral-surface1: #111827;
-  --primitive-neutral-surface2: #1F2937;
-  --primitive-neutral-surface3: #374151;
-  --primitive-neutral-border: #334155;
-  --primitive-neutral-divider: #475569;
+  --primitive-neutral-background: #080808;
+  --primitive-neutral-surface1: #121212;
+  --primitive-neutral-surface2: #1A1A1A;
+  --primitive-neutral-surface3: #262626;
+  --primitive-neutral-border: #333333;
+  --primitive-neutral-divider: #404040;
 
   --primitive-typography-primary: #F8FAFC;
   --primitive-typography-secondary: #CBD5E1;
