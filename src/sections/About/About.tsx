@@ -81,13 +81,16 @@ export const About = () => {
             >
               <div className="relative group w-full max-w-sm lg:max-w-md mx-auto">
                 {/* Ambient Glow Behind Portrait */}
-                <div className="absolute -inset-4 bg-primary/20 blur-[80px] rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-400 pointer-events-none" />
+                <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-10 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
                 
-                {/* Portrait Container */}
-                <div className="relative aspect-[4/5] rounded-[32px] overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl transition-all duration-400 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)]">
-                  {/* Subtle Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent pointer-events-none" />
-                  
+                {/* Soft-Edged Portrait Container */}
+                <div 
+                  className="relative aspect-[4/5] w-full transition-transform duration-500 ease-out group-hover:-translate-y-1.5"
+                  style={{
+                    maskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 50%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 50%, transparent 100%)'
+                  }}
+                >
                   {/* Image */}
                   <img 
                     src="/photo.png" 
@@ -95,12 +98,6 @@ export const About = () => {
                     className="relative w-full h-full object-cover object-center z-10" 
                     loading="lazy" 
                   />
-                  
-                  {/* Inner Glow on Hover */}
-                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none z-20" />
-                  
-                  {/* Glass Border Overlay */}
-                  <div className="absolute inset-0 rounded-[32px] border border-white/10 opacity-50 z-20 pointer-events-none" />
                 </div>
               </div>
             </motion.div>
