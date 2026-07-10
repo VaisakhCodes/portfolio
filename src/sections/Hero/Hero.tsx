@@ -121,10 +121,16 @@ export const Hero = () => {
                 </Button>
                 
                 {/* Secondary CTA */}
-                <Button variant="outline" size="lg" className="w-full sm:w-auto group bg-transparent border-border/40 hover:bg-surface-elevated/40 hover:border-border/80 transition-all duration-500 px-8">
+                <a 
+                  href="/resume/Vaisakh_Mohan_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 border border-border/40 bg-transparent hover:bg-surface-elevated/40 hover:border-border/80 text-text-secondary hover:text-text-primary transition-all duration-500 py-3 px-8 text-body-l w-full sm:w-auto group"
+                >
                   <Download className="mr-3 h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1" />
                   Resume
-                </Button>
+                </a>
               </motion.div>
               
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 mt-5 lg:mt-7">

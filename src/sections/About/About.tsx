@@ -3,7 +3,6 @@ import { Section } from '@/components/layout/Section';
 import { Container } from '@/components/layout/Container';
 import { PageTransition } from '@/components/layout/PageTransition';
 import { SectionHeading } from '@/components/portfolio/SectionHeading';
-import { Card } from '@/components/ui/Card';
 import { GraduationCap } from 'lucide-react';
 
 const scrollVariants: any = {
@@ -50,23 +49,33 @@ export const About = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
               >
-                <motion.div variants={scrollVariants}>
-                  <Card className="p-8 md:p-10 border-transparent bg-surface-elevated/20 shadow-none">
-                    <h4 className="text-h5 font-bold text-text-primary mb-5 flex items-center gap-3">
-                      <GraduationCap className="h-5 w-5 text-primary" aria-hidden="true" />
-                      Education
-                    </h4>
-                    <ul className="space-y-5">
-                      <li className="flex flex-col gap-1">
-                        <span className="text-body font-semibold text-text-primary">Master of Computer Applications</span>
-                        <span className="text-body-s text-text-muted">Amrita Vishwa Vidyapeetham (2024–2026)</span>
-                      </li>
-                      <li className="flex flex-col gap-1">
-                        <span className="text-body font-semibold text-text-primary">Bachelor of Computer Applications</span>
-                        <span className="text-body-s text-text-muted">University of Calicut (2021–2024)</span>
-                      </li>
-                    </ul>
-                  </Card>
+                <motion.div variants={scrollVariants} className="w-full">
+                  <div className="group relative w-full overflow-hidden bg-surface-elevated/30 rounded-[24px] p-7 sm:p-8 hover:bg-surface-elevated/50 transition-all duration-500">
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-12 h-12 rounded-[14px] bg-primary/10 flex items-center justify-center border border-primary/20">
+                        <GraduationCap className="h-6 w-6 text-primary" aria-hidden="true" />
+                      </div>
+                      <span className="text-sm font-bold tracking-widest text-text-muted uppercase">
+                        Education
+                      </span>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex flex-col gap-1.5 mb-8">
+                      <h4 className="text-xl sm:text-2xl font-extrabold text-text-primary tracking-tight">
+                        Master of Computer Applications
+                      </h4>
+                      <p className="text-sm sm:text-base text-text-muted font-medium">
+                        Amrita Vishwa Vidyapeetham
+                      </p>
+                    </div>
+
+                    {/* Batch Badge */}
+                    <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-surface-elevated/80 border border-border/40 text-xs font-semibold text-text-secondary">
+                      Batch: 2024 – 2026
+                    </div>
+                  </div>
                 </motion.div>
               </motion.div>
             </div>
