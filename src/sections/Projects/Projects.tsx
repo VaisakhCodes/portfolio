@@ -26,6 +26,8 @@ type Project = {
   githubUrl: string;
   imageUrl?: string;
   features: string[];
+  gradientClass?: string;
+  chipHoverClass?: string;
 };
 
 const projectsData: Project[] = [
@@ -41,7 +43,9 @@ const projectsData: Project[] = [
       "RAG-based knowledge retrieval architecture",
       "Deep learning NLP integration",
       "Intuitive medical information interface"
-    ]
+    ],
+    gradientClass: 'from-cyan-500/15 via-blue-500/5 to-transparent',
+    chipHoverClass: 'hover:border-cyan-500/40 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:text-cyan-200'
   },
   {
     id: 'easy-bus',
@@ -55,7 +59,9 @@ const projectsData: Project[] = [
       "Role-based access control",
       "Admin fleet management dashboard",
       "Streamlined booking interface"
-    ]
+    ],
+    gradientClass: 'from-orange-500/15 via-red-500/5 to-transparent',
+    chipHoverClass: 'hover:border-orange-500/40 hover:shadow-[0_0_15px_rgba(249,115,22,0.15)] hover:text-orange-200'
   },
   {
     id: 'premium-portfolio',
@@ -71,7 +77,9 @@ const projectsData: Project[] = [
       "Component-driven architecture",
       "Accessibility-first implementation",
       "Smooth animations and micro-interactions"
-    ]
+    ],
+    gradientClass: 'from-purple-500/15 via-indigo-500/5 to-transparent',
+    chipHoverClass: 'hover:border-purple-500/40 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:text-purple-200'
   }
 ];
 
@@ -110,6 +118,8 @@ export const Projects = () => {
       technologies={project.technologies}
       githubUrl={project.githubUrl}
       imageUrl={project.imageUrl}
+      gradientClass={project.gradientClass}
+      chipHoverClass={project.chipHoverClass}
       className="w-full h-full"
     />
   );

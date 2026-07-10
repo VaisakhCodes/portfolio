@@ -9,6 +9,8 @@ export interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
   technologies?: string[];
   githubUrl?: string;
   demoUrl?: string;
+  gradientClass?: string;
+  chipHoverClass?: string;
 }
 
 export const ProjectCard = ({
@@ -17,6 +19,8 @@ export const ProjectCard = ({
   technologies = [],
   githubUrl,
   demoUrl,
+  gradientClass,
+  chipHoverClass,
   className,
   ...props
 }: ProjectCardProps) => {
@@ -58,20 +62,30 @@ export const ProjectCard = ({
 
       {/* Content Area (Bottom) */}
       <div className={cn(
-        "flex flex-col items-start text-left flex-grow w-full",
-        "px-6 pb-8 pt-4"
+        "relative flex flex-col items-start text-left flex-grow w-full px-6 pb-8 pt-5",
       )}>
-        <h3 className="font-extrabold text-text-primary mb-3 tracking-tight text-h5 w-full">
+        {/* Ambient Glow Background */}
+        <div className={cn(
+          "absolute inset-0 pointer-events-none transition-all duration-500",
+          "bg-gradient-to-b opacity-40 group-hover:opacity-80",
+          gradientClass || "from-white/5 to-transparent"
+        )} />
+
+        <h3 className="relative font-extrabold text-text-primary mb-3 tracking-tight text-h5 w-full z-10 drop-shadow-sm">
           {title}
         </h3>
         
         {technologies.length > 0 && (
-          <div className="mb-4 w-full">
+          <div className="relative mb-4 w-full z-10">
             <div className="flex flex-wrap items-center justify-start gap-2">
               {technologies.map((tech) => (
                 <span 
                   key={tech}
-                  className="bg-background border border-border/40 px-3 py-1.5 rounded-full text-[0.65rem] font-semibold tracking-wider text-text-muted uppercase"
+                  className={cn(
+                    "bg-white/5 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-[0.65rem] font-semibold tracking-wider text-text-primary/70 uppercase transition-all duration-300",
+                    "shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]",
+                    chipHoverClass || "hover:border-white/20 hover:bg-white/10"
+                  )}
                 >
                   {tech}
                 </span>
