@@ -3,7 +3,6 @@ import { AnimatePresence } from 'framer-motion';
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { ScrollToTop } from '@/components/layout/ScrollToTop';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 import { Hero } from '@/sections/Hero';
@@ -50,7 +49,6 @@ function App() {
       </main>
 
           <Footer />
-          <ScrollToTop />
         </div>
       )}
     </div>
