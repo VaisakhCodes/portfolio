@@ -7,26 +7,32 @@ import { Button } from '@/components/ui/Button/Button';
 import { TypewriterEffect } from '@/components/ui/TypewriterEffect';
 import { ArrowRight, Download, TerminalSquare, Layers, CheckCircle2 } from 'lucide-react';
 
-const containerVariants: any = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
-};
 
-const itemVariants: any = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } // Premium cinematic easing
-  }
-};
 
 export const Hero = () => {
   const prefersReducedMotion = useReducedMotion();
   
+  // Animation helpers
+  const getInitial = (customY = 24, customScale = 1) => ({
+    opacity: 0,
+    y: prefersReducedMotion ? 0 : customY,
+    filter: prefersReducedMotion ? 'blur(0px)' : 'blur(10px)',
+    scale: prefersReducedMotion ? 1 : customScale
+  });
+
+  const getAnimate = () => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    scale: 1
+  });
+
+  const getTransition = (delay: number, duration: number) => ({
+    delay,
+    duration,
+    ease: [0.16, 1, 0.3, 1] as const
+  });
+
   // Parallax setup
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -72,7 +78,7 @@ export const Hero = () => {
 
   return (
     <PageTransition>
-      <Section className="relative min-h-[70vh] lg:min-h-[75vh] flex flex-col justify-center pt-12 pb-0 md:pt-16 lg:pt-12 lg:pb-0" background="transparent">
+      <Section id="home" className="relative min-h-[70vh] lg:min-h-[75vh] flex flex-col justify-center pt-12 pb-0 md:pt-16 lg:pt-12 lg:pb-0" background="transparent">
         
 
         
@@ -80,34 +86,60 @@ export const Hero = () => {
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-8 items-center">
             
             {/* Content Column */}
-            <motion.div 
-              className="flex flex-col items-center text-center lg:items-start lg:text-left lg:col-span-7 lg:-translate-y-7 md:-translate-y-2"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:col-span-7 lg:-translate-y-7 md:-translate-y-2">
               
               <motion.span 
-                variants={itemVariants}
+                initial={getInitial()}
+                animate={getAnimate()}
+                transition={getTransition(0.0, 0.5)}
                 className="block text-xl md:text-2xl lg:text-[28px] font-medium text-text-secondary opacity-80 mb-3 lg:mb-4 tracking-wide"
               >
                 Hi, I am
               </motion.span>
-              <motion.h1 variants={itemVariants} className="text-[3rem] leading-[0.9] md:text-[4.5rem] lg:text-[5.125rem] font-extrabold tracking-tight text-text-primary mb-5 md:mb-7">
+
+              <motion.h1 
+                initial={getInitial()}
+                animate={getAnimate()}
+                transition={getTransition(0.1, 0.6)}
+                className="text-[3rem] leading-[0.9] md:text-[4.5rem] lg:text-[5.125rem] font-extrabold tracking-tight text-text-primary"
+              >
                 Vaisakh Mohan <br className="hidden lg:block" />
-                <span className="font-light tracking-normal text-[1.5rem] md:text-[2.5rem] lg:text-[3rem] block mt-4 md:mt-5">
-                  <TypewriterEffect />
-                </span>
               </motion.h1>
               
-              {/* Premium Inline Tags */}
-              <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 mb-5 md:mb-7 text-body-s font-medium text-text-secondary">
-                <span className="flex items-center gap-2.5"><TerminalSquare className="w-4 h-4 text-primary/80"/> Python & React</span>
-                <span className="flex items-center gap-2.5"><Layers className="w-4 h-4 text-primary/80"/> Modern Frontend</span>
-                <span className="flex items-center gap-2.5"><CheckCircle2 className="w-4 h-4 text-primary/80"/> Production-Ready</span>
+              <motion.div 
+                initial={getInitial()}
+                animate={getAnimate()}
+                transition={getTransition(0.2, 0.6)}
+                className="font-light tracking-normal text-[1.5rem] md:text-[2.5rem] lg:text-[3rem] block mt-4 md:mt-5 mb-5 md:mb-7 text-text-primary"
+              >
+                <TypewriterEffect />
               </motion.div>
+              
+              {/* Premium Inline Tags */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 mb-5 md:mb-7 text-body-s font-medium text-text-secondary">
+                {[
+                  { icon: TerminalSquare, text: 'Python & React' },
+                  { icon: Layers, text: 'Modern Frontend' },
+                  { icon: CheckCircle2, text: 'Production-Ready' }
+                ].map((badge, i) => (
+                  <motion.span 
+                    key={badge.text}
+                    initial={getInitial()}
+                    animate={getAnimate()}
+                    transition={getTransition(0.35 + (i * 0.08), 0.5)}
+                    className="flex items-center gap-2.5"
+                  >
+                    <badge.icon className="w-4 h-4 text-primary/80"/> {badge.text}
+                  </motion.span>
+                ))}
+              </div>
 
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+              <motion.div 
+                initial={getInitial()}
+                animate={getAnimate()}
+                transition={getTransition(0.5, 0.5)}
+                className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto"
+              >
                 {/* Primary CTA */}
                 <Button 
                   size="lg" 
@@ -133,30 +165,41 @@ export const Hero = () => {
                 </a>
               </motion.div>
               
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 mt-5 lg:mt-7">
-                <span className="text-caption font-semibold text-text-muted uppercase tracking-[0.2em]">
+              <div className="flex flex-col sm:flex-row items-center gap-6 mt-5 lg:mt-7">
+                <motion.span 
+                  initial={getInitial()}
+                  animate={getAnimate()}
+                  transition={getTransition(0.6, 0.5)}
+                  className="text-caption font-semibold text-text-muted uppercase tracking-[0.2em]"
+                >
                   Connect
-                </span>
-                <div className="h-px w-12 bg-border hidden sm:block" />
-                <SocialLinks 
-                  mode="icon"
-                  githubUrl="https://github.com/VaisakhCodes"
-                  linkedinUrl="https://linkedin.com/in/vaisakh-mohan"
+                </motion.span>
+                <motion.div 
+                  initial={getInitial()}
+                  animate={getAnimate()}
+                  transition={getTransition(0.68, 0.5)}
+                  className="h-px w-12 bg-border hidden sm:block" 
                 />
-              </motion.div>
-            </motion.div>
+                <motion.div
+                  initial={getInitial()}
+                  animate={getAnimate()}
+                  transition={getTransition(0.76, 0.5)}
+                >
+                  <SocialLinks 
+                    mode="icon"
+                    githubUrl="https://github.com/VaisakhCodes"
+                    linkedinUrl="https://linkedin.com/in/vaisakh-mohan"
+                  />
+                </motion.div>
+              </div>
+            </div>
 
             {/* Image / Visual Column */}
             <motion.div 
               className="relative w-full max-w-xl mx-auto lg:max-w-none lg:col-span-5 flex items-center justify-center cursor-default bg-transparent"
-              initial={{ opacity: 0, filter: 'blur(20px)' }}
-              animate={prefersReducedMotion ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 1, filter: 'blur(0px)', y: [0, -8, 0] }}
-              transition={{
-                 opacity: { duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 },
-                 filter: { duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 },
-                 y: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
-                 scale: { duration: 0.35, ease: 'easeOut' }
-              }}
+              initial={getInitial(16, 0.95)}
+              animate={getAnimate()}
+              transition={getTransition(0, 0.8)}
               style={{ 
                 perspective: 1400,
                 rotateX: prefersReducedMotion ? 12 : rotateX,

@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 import { Hero } from '@/sections/Hero';
 import { About } from '@/sections/About';
@@ -8,10 +12,24 @@ import { Projects } from '@/sections/Projects';
 import { Contact } from '@/sections/Contact';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-text-primary font-sans antialiased relative overflow-hidden">
-      {/* Premium Background Atmosphere */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none">
+      <AnimatePresence>
+        {isLoading && <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <motion.div
+          key="content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          className="flex flex-col min-h-screen w-full"
+        >
+          {/* Premium Background Atmosphere */}
+          <div className="fixed inset-0 z-[-1] pointer-events-none">
         {/* Subtle indigo ambient glow behind Hero (top right) */}
         <div className="absolute top-[10%] right-[10%] w-[800px] h-[800px] rounded-full blur-[150px] pointer-events-none" style={{ background: 'rgba(99,102,241,0.10)' }} />
         {/* Faint glow near lower-left */}
@@ -34,8 +52,10 @@ function App() {
         <Contact />
       </main>
 
-      <Footer />
-      <ScrollToTop />
+          <Footer />
+          <ScrollToTop />
+        </motion.div>
+      )}
     </div>
   );
 }

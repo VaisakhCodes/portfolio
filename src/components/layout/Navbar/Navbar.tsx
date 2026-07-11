@@ -6,6 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
 
 const NAV_LINKS = [
+  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
@@ -14,26 +15,38 @@ const NAV_LINKS = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
+      // Update active section based on scroll position using getBoundingClientRect
       const sections = NAV_LINKS.map(link => link.href.substring(1));
-      let current = '';
+      let current = 'home';
+      
       for (const section of sections) {
         const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 150) {
-          current = section;
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section top is near or above the middle of the viewport
+          if (rect.top <= 200) {
+            current = section;
+          }
         }
       }
+      
+      // If we are at the very bottom of the page, activate the last section
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+        current = sections[sections.length - 1];
+      }
+      
       setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Call once on mount
+    // Small delay on initial call to ensure DOM has rendered its layout
+    setTimeout(handleScroll, 100);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -52,7 +65,7 @@ export const Navbar = () => {
     if (elem) {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({
-        top: elem.offsetTop - 80, // Offset for fixed header
+        top: elem.getBoundingClientRect().top + window.scrollY - 80, // Offset for fixed header
         behavior: prefersReducedMotion ? 'auto' : 'smooth',
       });
     }
@@ -64,10 +77,10 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-40 transition-all duration-500',
+        'fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out',
         isScrolled 
-          ? 'bg-surface/80 backdrop-blur-md py-4' 
-          : 'bg-transparent py-6 lg:py-8'
+          ? 'bg-[#0a0a0c]/75 backdrop-blur-[18px] border-b border-white/[0.06] py-4' 
+          : 'bg-transparent border-b border-transparent py-6 lg:py-8'
       )}
     >
       <Container>
