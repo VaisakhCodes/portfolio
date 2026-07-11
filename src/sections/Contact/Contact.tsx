@@ -6,6 +6,9 @@ import { PageTransition } from '@/components/layout/PageTransition';
 import { SectionHeading } from '@/components/portfolio/SectionHeading';
 import { SocialLinks } from '@/components/portfolio/SocialLinks';
 import { Send, CheckCircle2 } from 'lucide-react';
+import emailjs from "@emailjs/browser";
+
+
 
 const scrollVariants: any = {
   hidden: { opacity: 0, y: 30 },
@@ -33,18 +36,44 @@ export const Contact = () => {
     setFormData(prev => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate network request
+  const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+
+  setIsSubmitting(true);
+
+  try {
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
+
+    setIsSuccess(true);
+
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+
     setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
-  };
+      setIsSuccess(false);
+    }, 5000);
+
+  } catch (error) {
+    console.error("EmailJS Error:", error);
+    alert("Failed to send message. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <PageTransition>
