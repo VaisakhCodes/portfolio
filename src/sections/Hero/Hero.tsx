@@ -1,4 +1,3 @@
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { Section } from '@/components/layout/Section';
 import { Container } from '@/components/layout/Container';
 import { PageTransition } from '@/components/layout/PageTransition';
@@ -7,60 +6,7 @@ import { Button } from '@/components/ui/Button/Button';
 import { TypewriterEffect } from '@/components/ui/TypewriterEffect';
 import { ArrowRight, Download, TerminalSquare, Layers, CheckCircle2 } from 'lucide-react';
 
-
-
 export const Hero = () => {
-  const prefersReducedMotion = useReducedMotion();
-  
-  // Animation helpers
-  const getInitial = (customY = 24, customScale = 1) => ({
-    opacity: 0,
-    y: prefersReducedMotion ? 0 : customY,
-    filter: prefersReducedMotion ? 'blur(0px)' : 'blur(10px)',
-    scale: prefersReducedMotion ? 1 : customScale
-  });
-
-  const getAnimate = () => ({
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    scale: 1
-  });
-
-  const getTransition = (delay: number, duration: number) => ({
-    delay,
-    duration,
-    ease: [0.16, 1, 0.3, 1] as const
-  });
-
-  // Parallax setup
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth, damped physics for premium feel
-  const springConfig = { damping: 40, stiffness: 120, mass: 1 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
-
-  // Base 3D rotation with gentle mouse parallax (±4°)
-  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [16, 8]); // Base 12°
-  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-22, -14]); // Base -18°
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    if (prefersReducedMotion) return;
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   const handleScrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -79,41 +25,29 @@ export const Hero = () => {
   return (
     <PageTransition>
       <Section id="home" className="relative min-h-[70vh] lg:min-h-[75vh] flex flex-col justify-center pt-12 pb-0 md:pt-16 lg:pt-12 lg:pb-0" background="transparent">
-        
-
-        
         <Container className="relative z-10">
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-8 items-center">
             
             {/* Content Column */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:col-span-7 lg:-translate-y-7 md:-translate-y-2">
               
-              <motion.span 
-                initial={getInitial()}
-                animate={getAnimate()}
-                transition={getTransition(0.0, 0.5)}
+              <span 
                 className="block text-xl md:text-2xl lg:text-[28px] font-medium text-text-secondary opacity-80 mb-3 lg:mb-4 tracking-wide"
               >
                 Hi, I am
-              </motion.span>
+              </span>
 
-              <motion.h1 
-                initial={getInitial()}
-                animate={getAnimate()}
-                transition={getTransition(0.1, 0.6)}
+              <h1 
                 className="text-[3rem] leading-[0.9] md:text-[4.5rem] lg:text-[5.125rem] font-extrabold tracking-tight text-text-primary"
               >
                 Vaisakh Mohan <br className="hidden lg:block" />
-              </motion.h1>
+              </h1>
               
-              <motion.div 
-                initial={getInitial()}
-                animate={getAnimate()}
-                transition={getTransition(0.2, 0.6)}
+              <div 
                 className="font-light tracking-normal text-[1.5rem] md:text-[2.5rem] lg:text-[3rem] block mt-4 md:mt-5 mb-5 md:mb-7 text-text-primary"
               >
                 <TypewriterEffect />
-              </motion.div>
+              </div>
               
               {/* Premium Inline Tags */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 mb-5 md:mb-7 text-body-s font-medium text-text-secondary">
@@ -121,23 +55,17 @@ export const Hero = () => {
                   { icon: TerminalSquare, text: 'Python & React' },
                   { icon: Layers, text: 'Modern Frontend' },
                   { icon: CheckCircle2, text: 'Production-Ready' }
-                ].map((badge, i) => (
-                  <motion.span 
+                ].map((badge) => (
+                  <span 
                     key={badge.text}
-                    initial={getInitial()}
-                    animate={getAnimate()}
-                    transition={getTransition(0.35 + (i * 0.08), 0.5)}
                     className="flex items-center gap-2.5"
                   >
                     <badge.icon className="w-4 h-4 text-primary/80"/> {badge.text}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
 
-              <motion.div 
-                initial={getInitial()}
-                animate={getAnimate()}
-                transition={getTransition(0.5, 0.5)}
+              <div 
                 className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto"
               >
                 {/* Primary CTA */}
@@ -163,53 +91,35 @@ export const Hero = () => {
                   <Download className="mr-3 h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1" />
                   Resume
                 </a>
-              </motion.div>
+              </div>
               
               <div className="flex flex-col sm:flex-row items-center gap-6 mt-5 lg:mt-7">
-                <motion.span 
-                  initial={getInitial()}
-                  animate={getAnimate()}
-                  transition={getTransition(0.6, 0.5)}
+                <span 
                   className="text-caption font-semibold text-text-muted uppercase tracking-[0.2em]"
                 >
                   Connect
-                </motion.span>
-                <motion.div 
-                  initial={getInitial()}
-                  animate={getAnimate()}
-                  transition={getTransition(0.68, 0.5)}
+                </span>
+                <div 
                   className="h-px w-12 bg-border hidden sm:block" 
                 />
-                <motion.div
-                  initial={getInitial()}
-                  animate={getAnimate()}
-                  transition={getTransition(0.76, 0.5)}
-                >
+                <div>
                   <SocialLinks 
                     mode="icon"
                     githubUrl="https://github.com/VaisakhCodes"
                     linkedinUrl="https://linkedin.com/in/vaisakh-mohan"
                   />
-                </motion.div>
+                </div>
               </div>
             </div>
 
             {/* Image / Visual Column */}
-            <motion.div 
+            <div 
               className="relative w-full max-w-xl mx-auto lg:max-w-none lg:col-span-5 flex items-center justify-center cursor-default bg-transparent"
-              initial={getInitial(16, 0.95)}
-              animate={getAnimate()}
-              transition={getTransition(0, 0.8)}
               style={{ 
                 perspective: 1400,
-                rotateX: prefersReducedMotion ? 12 : rotateX,
-                rotateY: prefersReducedMotion ? -18 : rotateY,
-                rotateZ: -8,
-                transformStyle: "preserve-3d"
+                transformStyle: "preserve-3d",
+                transform: "rotateX(12deg) rotateY(-18deg) rotateZ(-8deg)"
               }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              whileHover={{ scale: 1.02 }}
             >
               <img 
                 src="/iso-tech-sculpture.png" 
@@ -221,7 +131,7 @@ export const Hero = () => {
                 }}
                 loading="eager"
               />
-            </motion.div>
+            </div>
           </div>
         </Container>
       </Section>
