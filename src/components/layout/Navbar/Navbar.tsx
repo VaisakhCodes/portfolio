@@ -55,8 +55,7 @@ export const Navbar = () => {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    console.log("Navigation clicked:", href);
-    
+        
     // Store the target href and close the menu
     pendingNavRef.current = href;
     setIsMobileMenuOpen(false);
