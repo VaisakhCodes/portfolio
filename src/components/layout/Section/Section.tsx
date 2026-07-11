@@ -28,7 +28,7 @@ export const Section = ({
     <section
       id={id}
       className={cn(
-        'py-16 md:py-24', // Default vertical spacing
+        'py-16 md:py-24 scroll-mt-24', // Default vertical spacing + fixed header scroll offset
         {
           'bg-surface': background === 'default',
           'bg-surface-elevated': background === 'elevated',

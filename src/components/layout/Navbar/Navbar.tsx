@@ -53,19 +53,8 @@ export const Navbar = () => {
   // Ref to store pending navigation after menu closes
   const pendingNavRef = React.useRef<string | null>(null);
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-        
-    // Store the target href and close the menu
-    pendingNavRef.current = href;
-    setIsMobileMenuOpen(false);
-  };
-
-  // Called by AnimatePresence when the mobile menu finishes unmounting
-  const handleExitComplete = () => {
-    const href = pendingNavRef.current;
-    if (!href) return;
-    
+  // Unified scroll execution relying on native scrollIntoView and CSS scroll-margin-top
+  const executeScroll = (href: string) => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
 
@@ -76,20 +65,31 @@ export const Navbar = () => {
       const elem = document.getElementById(targetId);
       
       if (elem) {
-        // Precise calculation using the fixed header
-        const siteHeader = document.getElementById('site-header');
-        const headerHeight = siteHeader ? siteHeader.getBoundingClientRect().height : 80;
-        const top = elem.getBoundingClientRect().top + window.scrollY - headerHeight;
-        
-        window.scrollTo({
-          top,
-          behavior: scrollBehavior,
-        });
+        elem.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
       }
     }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     
-    // Clear the pending navigation
-    pendingNavRef.current = null;
+    if (isMobileMenuOpen) {
+      // Store the target href and close the menu. 
+      // The actual scroll will be triggered by onExitComplete.
+      pendingNavRef.current = href;
+      setIsMobileMenuOpen(false);
+    } else {
+      // Desktop: execute scroll immediately
+      executeScroll(href);
+    }
+  };
+
+  // Called by AnimatePresence when the mobile menu finishes unmounting
+  const handleExitComplete = () => {
+    if (pendingNavRef.current) {
+      executeScroll(pendingNavRef.current);
+      pendingNavRef.current = null;
+    }
   };
 
   // Calculate dynamic top offset for the fixed overlay to perfectly match the header's bottom edge
