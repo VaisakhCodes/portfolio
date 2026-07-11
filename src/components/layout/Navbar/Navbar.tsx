@@ -52,23 +52,31 @@ export const Navbar = () => {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setIsMobileMenuOpen(false);
+    
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
     
     if (href === '#') {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-      return;
+      window.scrollTo({ top: 0, behavior: scrollBehavior });
+    } else {
+      const targetId = href.replace('#', '');
+      const elem = document.getElementById(targetId);
+      
+      if (elem) {
+        const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 80;
+        const top = elem.getBoundingClientRect().top + window.scrollY - headerHeight;
+        
+        window.scrollTo({
+          top,
+          behavior: scrollBehavior,
+        });
+      }
     }
 
-    const targetId = href.replace('#', '');
-    const elem = document.getElementById(targetId);
-    if (elem) {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({
-        top: elem.getBoundingClientRect().top + window.scrollY - 80, // Offset for fixed header
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-      });
-    }
+    // Delay closing the mobile menu so it doesn't interrupt smooth scrolling
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+    }, 150);
   };
 
   return (
