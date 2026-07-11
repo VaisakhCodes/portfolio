@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -21,11 +21,8 @@ function App() {
       </AnimatePresence>
 
       {!isLoading && (
-        <motion.div
+        <div
           key="content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
           className="flex flex-col min-h-screen w-full"
         >
           {/* Premium Background Atmosphere */}
@@ -54,7 +51,7 @@ function App() {
 
           <Footer />
           <ScrollToTop />
-        </motion.div>
+        </div>
       )}
     </div>
   );

@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const TITLES = [
-  "Software Developer",
-  "Frontend Developer",
-  "React Developer",
-  "Django Developer",
-  "Full Stack Developer"
+  "Software Developer"
 ];
 
 const TYPE_SPEED = 280;
