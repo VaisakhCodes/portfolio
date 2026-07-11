@@ -50,12 +50,26 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Ref to store pending navigation after menu closes
+  const pendingNavRef = React.useRef<string | null>(null);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    console.log("Navigation clicked:", href);
+    
+    // Store the target href and close the menu
+    pendingNavRef.current = href;
+    setIsMobileMenuOpen(false);
+  };
+
+  // Called by AnimatePresence when the mobile menu finishes unmounting
+  const handleExitComplete = () => {
+    const href = pendingNavRef.current;
+    if (!href) return;
     
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
-    
+
     if (href === '#') {
       window.scrollTo({ top: 0, behavior: scrollBehavior });
     } else {
@@ -63,7 +77,9 @@ export const Navbar = () => {
       const elem = document.getElementById(targetId);
       
       if (elem) {
-        const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 80;
+        // Precise calculation using the fixed header
+        const siteHeader = document.getElementById('site-header');
+        const headerHeight = siteHeader ? siteHeader.getBoundingClientRect().height : 80;
         const top = elem.getBoundingClientRect().top + window.scrollY - headerHeight;
         
         window.scrollTo({
@@ -72,82 +88,87 @@ export const Navbar = () => {
         });
       }
     }
-
-    // Delay closing the mobile menu so it doesn't interrupt smooth scrolling
-    setTimeout(() => {
-      setIsMobileMenuOpen(false);
-    }, 150);
+    
+    // Clear the pending navigation
+    pendingNavRef.current = null;
   };
 
+  // Calculate dynamic top offset for the fixed overlay to perfectly match the header's bottom edge
+  const overlayTopOffset = isScrolled ? '72px' : '88px';
+
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out',
-        isScrolled 
-          ? 'bg-[#0a0a0c]/75 backdrop-blur-[18px] border-b border-white/[0.06] py-4' 
-          : 'bg-transparent border-b border-transparent py-6 lg:py-8'
-      )}
-    >
-      <Container>
-        <nav className="flex items-center justify-end" aria-label="Main Navigation">
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <li key={link.name} className="relative">
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className={cn(
-                      'text-[0.85rem] font-medium tracking-wide transition-colors duration-300 relative py-2',
-                      isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
-                    )}
-                  >
-                    {link.name}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeNavIndicator"
-                        className="absolute -bottom-[18px] left-0 right-0 h-[2px] bg-primary rounded-t-full"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+    <>
+      <motion.header
+        id="site-header"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={cn(
+          'fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-in-out',
+          isScrolled 
+            ? 'bg-[#0a0a0c]/75 backdrop-blur-[18px] border-b border-white/[0.06] py-4' 
+            : 'bg-transparent border-b border-transparent py-6 lg:py-8'
+        )}
+      >
+        <Container>
+          <nav className="flex items-center justify-end" aria-label="Main Navigation">
+            {/* Desktop Navigation */}
+            <ul className="hidden md:flex items-center gap-8">
+              {NAV_LINKS.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <li key={link.name} className="relative">
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      className={cn(
+                        'text-[0.85rem] font-medium tracking-wide transition-colors duration-300 relative py-2',
+                        isActive ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+                      )}
+                    >
+                      {link.name}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNavIndicator"
+                          className="absolute -bottom-[18px] left-0 right-0 h-[2px] bg-primary rounded-t-full"
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
 
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
-            <Button
-              variant="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-expanded={isMobileMenuOpen}
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6 text-text-primary" />
-              ) : (
-                <Menu className="h-6 w-6 text-text-primary" />
-              )}
-            </Button>
-          </div>
-        </nav>
-      </Container>
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <Button
+                variant="icon"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-expanded={isMobileMenuOpen}
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6 text-text-primary" />
+                ) : (
+                  <Menu className="h-6 w-6 text-text-primary" />
+                )}
+              </Button>
+            </div>
+          </nav>
+        </Container>
+      </motion.header>
 
-      {/* Mobile Navigation */}
-      <AnimatePresence>
+      {/* Mobile Navigation Overlay - Independent from header layout */}
+      <AnimatePresence onExitComplete={handleExitComplete}>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-xl overflow-hidden"
+            className="md:hidden fixed inset-x-0 bottom-0 z-50 bg-surface/95 backdrop-blur-xl overflow-hidden shadow-2xl"
+            style={{ top: overlayTopOffset }}
           >
             <ul className="flex flex-col py-4 px-6 gap-4">
               {NAV_LINKS.map((link, i) => {
@@ -176,7 +197,7 @@ export const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 };
 
